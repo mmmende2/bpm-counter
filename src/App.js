@@ -19,6 +19,19 @@ function App() {
   //   console.log(bpmArray);
   //   setBPMArray(bpmArray.push(bpm))
   // }, bpm);
+    // BPM = tapCount * 60 sec / elapsedTime
+
+  function calculateBPM() {
+    console.log('e then m');
+    console.log(elapsedTime);
+    const multiplier = 60 / elapsedTime;
+    console.log(multiplier);
+    const result = tapCount * multiplier;
+    setBPM(result);
+    // setBPM(tapCount * ( 60 / elapsedTime));
+    // setBPMArray(bpmArray.push(bpm));
+  }
+
 
   function useInterval(callback, delay) {
     const savedCallback = useRef();
@@ -40,6 +53,7 @@ function App() {
 
   useInterval(() => {
     setElapsedTime(elapsedTime + 1);
+    calculateBPM();
   }, timerIsRunning ? msInterval : null);
 
   function stopAndResetTimer() {
@@ -48,12 +62,6 @@ function App() {
   }
 
 
-  // BPM = tapCount * 60 sec / elapsedTime
-
-  function calculateBPM() {
-    setBPM((tapCount * 60 )/ elapsedTime);
-    setBPMArray(bpmArray.push(bpm))
-  }
 
   function calculateBPMAverage() {
 
@@ -64,7 +72,7 @@ function App() {
       <CounterDisplayButton bpm={bpm} />
       elapsed timem {elapsedTime} and tap count {tapCount} bpm array is {bpmArray}
       <button className="" onClick={() => setTimerIsRunning(!timerIsRunning)} >Start + Pause Button </button>
-      <button className="tap" onClick={() => {setTimerIsRunning(true); setTapCount(tapCount + 1); calculateBPM()}} >Tap Baby!</button>
+      <button className="tap" onClick={() => {setTimerIsRunning(true); setTapCount(tapCount + 1);}} >Tap Baby!</button>
       <button onClick={() => stopAndResetTimer()} >Stop + Reset Button </button>
     </div>
   );
