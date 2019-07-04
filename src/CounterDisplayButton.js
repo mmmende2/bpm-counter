@@ -4,7 +4,7 @@ const CounterDisplayButton = (props) => {
   const { bpm } = props;
   return (
     // <button id="counter-display">{bpm === 0 ? "000" : bpm}</button>
-    <button id="counter-display">{printBPM(bpm)}</button>
+    <button className="counter-display">{printBPM(bpm)}</button>
   );
 }
 

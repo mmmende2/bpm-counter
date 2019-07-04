@@ -8,13 +8,14 @@
   height: 100vh;
   justify-content: space-between;
   width: 100vw;
+  color: black;
 }
 
 button {
   border-radius: 5px;
 }
 
-#counter-display {
+.counter-display {
   /* max-width: 200px; */
   font-size: 150px;
 }
@@ -23,5 +24,5 @@ button {
   /* height: 100px; */
   height: 60%;
   width: 90%;
-  background-color: aqua;
 }
+

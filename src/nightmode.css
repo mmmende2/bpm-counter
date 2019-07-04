@@ -1,0 +1,25 @@
+.night-mode-outrun {
+  background-color: black;
+}
+
+.night-mode-outrun button {
+  border-radius: 5px;
+  border-color: aqua;
+  background-color: black;
+  color: yellow;
+}
+
+.night-mode-outrun .counter-display {
+  /* max-width: 200px; */
+  font-size: 150px;
+  color: fuchsia;
+  background-color: black;
+}
+
+.night-mode-outrun .tap {
+  /* height: 100px; */
+  height: 60%;
+  width: 90%;
+  background-color: black;
+}
+

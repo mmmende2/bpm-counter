@@ -1,5 +1,6 @@
 import React, { useState, useRef, useEffect } from 'react';
 import './App.css';
+import './nightmode.css'
 import CounterDisplayButton from './CounterDisplayButton';
 
 function App() {
@@ -10,7 +11,6 @@ function App() {
   const [ msInterval, setMSInterval ] = useState(1000);
   const [ timerIsRunning, setTimerIsRunning ] = useState(false);
   let timer;
-
   // space bar lets you tap
   // 'r' is a reset
   // light mode, dark mode, other modes
@@ -51,21 +51,33 @@ function App() {
   // BPM = tapCount * 60 sec / elapsedTime
 
   function calculateBPM() {
-    setBPM((tapCount * 60 )/ elapsedTime);
-    setBPMArray(bpmArray.push(bpm))
+    const newBPM = ((tapCount * 60 )/ elapsedTime);
+    if (!isNaN(newBPM) && isFinite(newBPM)) {
+      setBPM(newBPM);
+      const newArray = [...bpmArray];
+      newArray.push(newBPM)
+      // setBPMArray(bpmArray.push(bpm))
+      setBPMArray(newArray);
+      console.log(bpmArray);
+    }
+  }
+  function toggleNightMode() {
+    debugger
   }
 
   function calculateBPMAverage() {
+
 
   } 
 
   return (
     <div className="App">
       <CounterDisplayButton bpm={bpm} />
-      elapsed timem {elapsedTime} and tap count {tapCount} bpm array is {bpmArray}
+      <span style={{'color': 'aqua'}}>elapsed timem {elapsedTime} and tap count {tapCount}</span>
       <button className="" onClick={() => setTimerIsRunning(!timerIsRunning)} >Start + Pause Button </button>
       <button className="tap" onClick={() => {setTimerIsRunning(true); setTapCount(tapCount + 1); calculateBPM()}} >Tap Baby!</button>
       <button onClick={() => stopAndResetTimer()} >Stop + Reset Button </button>
+      <button onClick={toggleNightMode()}>Toggle Night Mode</button>
     </div>
   );
 }
