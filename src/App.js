@@ -1,6 +1,6 @@
 import React, { useState, useRef, useEffect } from 'react';
-import './App.css';
 import './nightmode.css'
+import { GlobalStyle, ScontentWrap, StapButton, Sbutton, Sapp, } from './style';
 import CounterDisplayButton from './CounterDisplayButton';
 
 function App() {
@@ -71,16 +71,40 @@ function App() {
   }
 
   return (
-    <div className="App">
-      <div className="wrap">
+  
+      <ScontentWrap>
+        <GlobalStyle />
         <CounterDisplayButton bpm={bpm} />
-        <span style={{ 'color': 'aqua' }}>elapsed timem {elapsedTime} and tap count {tapCount}</span>
-        <button className="" onClick={() => setTimerIsRunning(!timerIsRunning)} >Start + Pause Button </button>
-        <button className="tap" onClick={() => { setTimerIsRunning(true); setTapCount(tapCount + 1); calculateBPM() }} >Tap Baby!</button>
-        <button onClick={() => stopAndResetTimer()} >Stop + Reset Button </button>
-        <button onClick={toggleNightMode()}>Toggle Night Mode</button>
-      </div>
-    </div>
+        {/* <span style={{ 'color': 'aqua' }}>elapsed timem {elapsedTime} and tap count {tapCount}</span> */}
+        <Sbutton 
+          onClick={() => setTimerIsRunning(!timerIsRunning)} 
+          onKeyPress={() => setTimerIsRunning(!timerIsRunning)} 
+          role="button" 
+        >
+          Start + Pause Button 
+        </Sbutton>
+        <StapButton 
+          onClick={() => { setTimerIsRunning(true); setTapCount(tapCount + 1); calculateBPM() }}
+          onKeyPress={() => { setTimerIsRunning(true); setTapCount(tapCount + 1); calculateBPM() }}
+          role="button"
+        >
+          Tap Baby!
+        </StapButton>
+        <Sbutton 
+          onClick={() => stopAndResetTimer()} 
+          onKeyPress={() => stopAndResetTimer()} 
+          role="button"
+        >
+          Stop + Reset Button 
+        </Sbutton>
+        <Sbutton 
+          onClick={toggleNightMode()}
+          onKeyPress={toggleNightMode()}
+          role="button"
+        >
+          Toggle Night Mode
+        </Sbutton>
+      </ScontentWrap>
   );
 }
 

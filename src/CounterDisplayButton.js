@@ -1,12 +1,5 @@
 import React from 'react';
-
-const CounterDisplayButton = (props) => {
-  const { bpm } = props;
-  return (
-    // <button id="counter-display">{bpm === 0 ? "000" : bpm}</button>
-    <button className="counter-display">{printBPM(bpm)}</button>
-  );
-}
+import { SbpmDisplay } from './style';
 
 const printBPM = (bpm) => {
   if (isNaN(bpm)) {
@@ -31,6 +24,14 @@ const printBPM = (bpm) => {
   } else {
     return leadingZero + leadingZero + bpm;
   }
+}
+
+// Limit the character count, the parent box will always take whatever you gives it and size it b
+const CounterDisplayButton = (props) => {
+  const { bpm } = props;
+  return (
+    <SbpmDisplay onClick={console.log('asdf')} onKeyPress={console.log('asdf')} role="button">{printBPM(bpm)}</SbpmDisplay>
+  );
 }
 
 export default CounterDisplayButton;
