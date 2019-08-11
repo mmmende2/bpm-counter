@@ -4,12 +4,12 @@ import './nightmode.css'
 import CounterDisplayButton from './CounterDisplayButton';
 
 function App() {
-  const [ tapCount, setTapCount ] = useState(0);
-  const [ elapsedTime, setElapsedTime ] = useState(0);
-  const [ bpm, setBPM ] = useState(0);
-  const [ bpmArray, setBPMArray ] = useState([]);
-  const [ msInterval, setMSInterval ] = useState(1000);
-  const [ timerIsRunning, setTimerIsRunning ] = useState(false);
+  const [tapCount, setTapCount] = useState(0);
+  const [elapsedTime, setElapsedTime] = useState(0);
+  const [bpm, setBPM] = useState(0);
+  const [bpmArray, setBPMArray] = useState([]);
+  const [msInterval, setMSInterval] = useState(1000);
+  const [timerIsRunning, setTimerIsRunning] = useState(false);
   let timer;
   // space bar lets you tap
   // 'r' is a reset
@@ -51,7 +51,7 @@ function App() {
   // BPM = tapCount * 60 sec / elapsedTime
 
   function calculateBPM() {
-    const newBPM = ((tapCount * 60 )/ elapsedTime);
+    const newBPM = ((tapCount * 60) / elapsedTime);
     if (!isNaN(newBPM) && isFinite(newBPM)) {
       setBPM(newBPM);
       const newArray = [...bpmArray];
@@ -68,16 +68,18 @@ function App() {
   function calculateBPMAverage() {
 
 
-  } 
+  }
 
   return (
     <div className="App">
-      <CounterDisplayButton bpm={bpm} />
-      <span style={{'color': 'aqua'}}>elapsed timem {elapsedTime} and tap count {tapCount}</span>
-      <button className="" onClick={() => setTimerIsRunning(!timerIsRunning)} >Start + Pause Button </button>
-      <button className="tap" onClick={() => {setTimerIsRunning(true); setTapCount(tapCount + 1); calculateBPM()}} >Tap Baby!</button>
-      <button onClick={() => stopAndResetTimer()} >Stop + Reset Button </button>
-      <button onClick={toggleNightMode()}>Toggle Night Mode</button>
+      <div className="wrap">
+        <CounterDisplayButton bpm={bpm} />
+        <span style={{ 'color': 'aqua' }}>elapsed timem {elapsedTime} and tap count {tapCount}</span>
+        <button className="" onClick={() => setTimerIsRunning(!timerIsRunning)} >Start + Pause Button </button>
+        <button className="tap" onClick={() => { setTimerIsRunning(true); setTapCount(tapCount + 1); calculateBPM() }} >Tap Baby!</button>
+        <button onClick={() => stopAndResetTimer()} >Stop + Reset Button </button>
+        <button onClick={toggleNightMode()}>Toggle Night Mode</button>
+      </div>
     </div>
   );
 }
