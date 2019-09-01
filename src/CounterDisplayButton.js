@@ -30,7 +30,7 @@ const printBPM = (bpm) => {
 const CounterDisplayButton = (props) => {
   const { bpm } = props;
   return (
-    <SbpmDisplay onClick={console.log('asdf')} onKeyPress={console.log('asdf')} role="button">{printBPM(bpm)}</SbpmDisplay>
+    <SbpmDisplay onClick={() => {}} onKeyPress={() => {}} role="button">{printBPM(bpm)}</SbpmDisplay>
   );
 }
 

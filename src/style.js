@@ -39,6 +39,7 @@ export const Sbutton = styled('div')`
   display: flex;
   justify-content: center;
   padding: 5px;
+  cursor: pointer;
 `;
 
 export const SbpmDisplay = styled('div')`
@@ -50,6 +51,7 @@ export const SbpmDisplay = styled('div')`
   display: flex;
   justify-content: center;
   padding: 0px ${dPad};
+  user-select: none;
 `;
 
 export const StapButton = styled('div')`
@@ -60,4 +62,9 @@ export const StapButton = styled('div')`
   display: flex;
   justify-content: center;
   align-items: center;
+  cursor: pointer;
+`;
+
+export const Stext = styled('div')`
+  user-select: none;
 `;
