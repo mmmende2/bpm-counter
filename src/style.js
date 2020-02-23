@@ -10,7 +10,9 @@ export const GlobalStyle = createGlobalStyle`
   body {
     font-size: 16px;
     font-family: sans-serif;
-    color: rebeccapurple !important;
+    color: ${props => props.nightActive ? 'black' : 'rebeccapurple'};
+    background-color: ${props => props.nightActive ? 'black' : 'white'};
+
   }
   #root {
     height: 100vh;
@@ -40,6 +42,8 @@ export const Sbutton = styled('div')`
   justify-content: center;
   padding: 5px;
   cursor: pointer;
+  border-color: ${props => props.nightActive ? 'aqua' : 'rebeccapurple'};
+  color: ${props => props.nightActive ? 'yellow' : 'black'};
 `;
 
 export const SbpmDisplay = styled('div')`
@@ -52,17 +56,21 @@ export const SbpmDisplay = styled('div')`
   justify-content: center;
   padding: 0px ${dPad};
   user-select: none;
+  border-color: ${props => props.nightActive ? 'fuchsia' : 'rebeccapurple'};
+  color: ${props => props.nightActive ? 'fuchsia' : 'black'};
 `;
 
 export const StapButton = styled('div')`
   border-radius: 5px;
   height: 50%;
   width: 100%;
-  border: 2px solid black;
+  border: 2px solid;
   display: flex;
   justify-content: center;
   align-items: center;
   cursor: pointer;
+  border-color: ${props => props.nightActive ? 'aqua' : 'rebeccapurple'};
+  color: ${props => props.nightActive ? 'yellow' : 'black'};
 `;
 
 export const Stext = styled('div')`

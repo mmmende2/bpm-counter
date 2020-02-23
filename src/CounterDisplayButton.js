@@ -28,9 +28,9 @@ const printBPM = (bpm) => {
 
 // Limit the character count, the parent box will always take whatever you gives it and size it b
 const CounterDisplayButton = (props) => {
-  const { bpm } = props;
+  const { bpm, nightActive } = props;
   return (
-    <SbpmDisplay onClick={() => {}} onKeyPress={() => {}} role="button">{printBPM(bpm)}</SbpmDisplay>
+    <SbpmDisplay nightActive={nightActive} onClick={() => {}} onKeyPress={() => {}} role="button">{printBPM(bpm)}</SbpmDisplay>
   );
 }
 
