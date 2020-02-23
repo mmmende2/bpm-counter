@@ -1,5 +1,4 @@
 import React, { useState, useRef, useEffect } from 'react';
-import './nightmode.css'
 import { GlobalStyle, ScontentWrap, StapButton, Sbutton, Sapp, Stext } from './style';
 import CounterDisplayButton from './CounterDisplayButton';
 
@@ -10,6 +9,7 @@ function App() {
   const [bpmArray, setBPMArray] = useState([]);
   const [msInterval, setMSInterval] = useState(250);
   const [timerIsRunning, setTimerIsRunning] = useState(false);
+  const [nightActive, setNightActive] = useState(false);
   let timer;
   // space bar lets you tap
   // 'r' is a reset
@@ -20,22 +20,22 @@ function App() {
   //   setBPMArray(bpmArray.push(bpm))
   // }, bpm);
   useEffect(() => {
-    document.addEventListener('keypress', (e) => {
-      if (e) {
-        if(e.keyCode === 32) {
-          handleTap();
-        }
-      }
-    });
+    // document.addEventListener('keydown', handleTap());
+    document.addEventListener('keydown', e => checkkeydown(e));
+    // document.addEventListener('keydown', e => checkkeydown(e));
     return () => {
-      document.removeEventListener('keypress', checkKeyPress);
+      console.log('listener clean up');
+      document.removeEventListener('keydown', e => checkkeydown(e));
     }
-  }, []);
+  });
 
-  const checkKeyPress = (e) => {
-    // 32 is space
+  // document.addEventListener('keydown', e => checkkeydown(e), true);
+  function checkkeydown(e) {
+    console.log('checkkeydown');
     if (e) {
+      e.preventDefault();
       if (e.keyCode === 32 || e.keyCode === "KeyT") {
+        console.log('handletap');
         handleTap();
       }
     }
@@ -63,7 +63,7 @@ function App() {
   }, timerIsRunning ? msInterval : null);
 
   function stopAndResetTimer() {
-    console.log('stop n resetbabby');
+    // console.log('stop n resetbabby');
     setTimerIsRunning(false);
     clearBPMArray();
     clearAll();
@@ -76,7 +76,8 @@ function App() {
   function calculateBPM() {
     // const newBPM = ((tapCount * 60) / elapsedTime);
     const newBPM = ((tapCount * 60) / elapsedTime);
-    console.log(newBPM);
+    // console.log(newBPM);
+    debugger;
     if (!isNaN(newBPM) && isFinite(newBPM)) {
       // setBPM(newBPM);
       const newArray = [...bpmArray];
@@ -108,7 +109,7 @@ function App() {
     setBPMArray([]);
   }
   function toggleNightMode() {
-    // debugger
+    setNightActive(!nightActive);
   }
 
   function calculateBPMAverage() {
@@ -119,50 +120,53 @@ function App() {
   }
 
   function handleTap() {
-    console.log('handle tap');
-    console.log(bpm);
+    // console.log('handle tap');
+    // console.log(bpm);
     setTimerIsRunning(true);
-    console.log('tap count is');
-    console.log(tapCount);
+    // console.log('tap count is');
+    // console.log(tapCount);
     setTapCount(tapCount + 1);
     calculateBPM();
   }
 
   return (
-  
-      <ScontentWrap>
-        <GlobalStyle />
-        <CounterDisplayButton bpm={bpm} />
-        {/* <span style={{ 'color': 'aqua' }}>elapsed timem {elapsedTime} and tap count {tapCount}</span> */}
-        <Sbutton 
-          onClick={() => setTimerIsRunning(!timerIsRunning)} 
-          onKeyPress={() => setTimerIsRunning(!timerIsRunning)} 
-          role="button" 
-        >
-          <Stext>Start + Pause Button</Stext>
-        </Sbutton>
-        <StapButton 
-          onClick={handleTap}
-          onKeyPress={handleTap}
-          role="button"
-        >
-          <Stext>Tap Baby!</Stext>
-        </StapButton>
-        <Sbutton 
-          onClick={stopAndResetTimer} 
-          onKeyPress={stopAndResetTimer}
-          role="button"
-        >
-          <Stext>Stop + Reset Button</Stext>
-        </Sbutton>
-        <Sbutton 
-          onClick={toggleNightMode()}
-          onKeyPress={toggleNightMode()}
-          role="button"
-        >
-          <Stext>Toggle Night Mode</Stext>
-        </Sbutton>
-      </ScontentWrap>
+    <ScontentWrap>
+      <GlobalStyle nightActive={nightActive} />
+      <CounterDisplayButton bpm={bpm} nightActive={nightActive} />
+      {/* <span style={{ 'color': 'aqua' }}>elapsed timem {elapsedTime} and tap count {tapCount}</span> */}
+      <Sbutton 
+        nightActive={nightActive}
+        onClick={() => setTimerIsRunning(!timerIsRunning)} 
+        // onkeydown={() => setTimerIsRunning(!timerIsRunning)} 
+        role="button" 
+      >
+        <Stext>Start + Pause Button</Stext>
+      </Sbutton>
+      <StapButton 
+        nightActive={nightActive}
+        onClick={() => handleTap()}
+        // onkeydown={() => handleTap()}
+        role="button"
+      >
+        <Stext>Tap Baby!</Stext>
+      </StapButton>
+      <Sbutton 
+        nightActive={nightActive}
+        onClick={() => stopAndResetTimer()} 
+        // onkeydown={() => stopAndResetTimer()}
+        role="button"
+      >
+        <Stext>Stop + Reset Button</Stext>
+      </Sbutton>
+      <Sbutton 
+        nightActive={nightActive}
+        onClick={() => toggleNightMode()}
+        // onkeydown={() => toggleNightMode()}
+        role="button"
+      >
+        <Stext>Toggle Night Mode</Stext>
+      </Sbutton>
+    </ScontentWrap>
   );
 }
 
